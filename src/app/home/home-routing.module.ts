@@ -6,16 +6,16 @@ import { HomeComponent } from './home.component';
 import { Shell } from '@app/shell/shell.service';
 import { HouseListComponent } from '@app/house/house-list/house-list.component';
 
-const routes: Routes = [
+/* const routes: Routes = [
   Shell.childRoutes([
     { path: '', redirectTo: '/houses', pathMatch: 'full' },
     { path: 'houses', component: HouseListComponent, data: { title: extract('Houses') } }
   ])
-];
+]; */
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+/*   imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule], */
   providers: []
 })
 export class HomeRoutingModule { }
