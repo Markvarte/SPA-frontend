@@ -4,11 +4,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { extract } from '@app/i18n';
 import { HomeComponent } from './home.component';
 import { Shell } from '@app/shell/shell.service';
+import { HouseListComponent } from '@app/house/house-list/house-list.component';
 
 const routes: Routes = [
   Shell.childRoutes([
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent, data: { title: extract('Home') } }
+    { path: '', redirectTo: '/houses', pathMatch: 'full' },
+    { path: 'houses', component: HouseListComponent, data: { title: extract('Houses') } }
   ])
 ];
 
