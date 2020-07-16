@@ -5,8 +5,7 @@ import { Shell } from '@app/shell/shell.service';
 const routes: Routes = [
   Shell.childRoutes([
     { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
-    // { path: 'flats', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) }, // TODO: ->
-    // // create flat component/module & service, change import(' !! ').then(m => m. !! )
+    { path: 'flats', loadChildren: () => import('./flat/flat.module').then(m => m.FlatModule) },
     // { path: 'tenants', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) }, // TODO: ->
     // create tenant component/module & service, change import(' !! ').then(m => m. !! )
   ]),
