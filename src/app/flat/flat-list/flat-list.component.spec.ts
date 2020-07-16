@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { HouseListComponent } from './house-list.component';
+import { FlatListComponent } from './flat-list.component';
 
-describe('HouseListComponent', () => {
-  let component: HouseListComponent;
-  let fixture: ComponentFixture<HouseListComponent>;
+describe('FlatListComponent', () => {
+  let component: FlatListComponent;
+  let fixture: ComponentFixture<FlatListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HouseListComponent ]
+      declarations: [ FlatListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HouseListComponent);
+    fixture = TestBed.createComponent(FlatListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

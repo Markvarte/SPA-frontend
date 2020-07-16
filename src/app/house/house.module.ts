@@ -4,6 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { HouseListComponent } from './house-list/house-list.component';
 import { HouseRoutingModule } from './house-routing.module';
+import { FlatListComponent } from '@app/flat/flat-list/flat-list.component'; // ?
 
 @NgModule({
   imports: [

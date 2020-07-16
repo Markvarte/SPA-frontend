@@ -7,7 +7,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CoreModule } from '@core';
 import { SharedModule } from '@shared';
-// import { HomeModule } from './home/home.module';
 import { ShellModule } from './shell/shell.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,7 +22,6 @@ import { HouseModule } from './house/house.module';
     CoreModule,
     SharedModule,
     ShellModule,
-  //  HomeModule,
     HouseModule,
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
