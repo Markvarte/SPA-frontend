@@ -1,3 +1,53 @@
-<p>
-  house-add-update works!
+<div class="row">
+  <p>
+  <button type="submit" class="btn btn-primary" [routerLink]="['']" >Back </button>
 </p>
+</div>
+<div>
+<h2> Houses form </h2>
+<p *ngIf="isValid && houseForm.pristine" class="alert alert-success">
+  Form submitted successfully.
+</p>
+<form [formGroup]="houseForm" (ngSubmit)="onFormSubmit()">
+  <div class="form-group">
+    <div class="row">
+      <input type="number" [hidden]='true' formControlName="id" >
+      <label class="control-label col-md-2">House number:</label>      
+      <input type="number" formControlName="num" >
+      <div class="text-danger" *ngIf="houseForm.get('num').errors && houseForm.get('num').touched">
+        natural number required
+      </div>
+    </div>
+    <div class="row">
+      <label class="control-label col-md-2">Street:</label>
+      <input type="text" formControlName="street">
+      <div class="text-danger" *ngIf="houseForm.get('street').errors && houseForm.get('street').touched">
+        minimal length - 3 characteristics, only letters or spaces
+      </div>
+    </div>
+    <div class="row">
+      <label class="control-label col-md-2">City: </label>
+      <input type="text" formControlName="sity">
+      <div class="text-danger" *ngIf="houseForm.get('sity').errors && houseForm.get('sity').touched">
+        minimal length - 3 characteristics, only letters or spaces
+      </div>
+    </div>
+    <div class="row">
+      <label class="control-label col-md-2">Country:</label>
+      <input type="text" formControlName="country">
+      <div class="text-danger" *ngIf="houseForm.get('country').errors && houseForm.get('country').touched">
+        minimal length - 3 characteristics, only letters or spaces
+      </div>
+    </div>
+    <div class="row">
+      <label class="control-label col-md-2">Post Code:</label>
+      <input type="text" formControlName="postCode">
+      <div class="text-danger" *ngIf="houseForm.get('postCode').errors && houseForm.get('postCode').touched">
+        minimal length - 4 characteristics
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="houseForm.invalid">Submit </button>
+
+</form>
+</div>
