@@ -33,11 +33,11 @@
             routerLinkActive="active">view
             tenants</button> </td>
         <td>
-          <a class="m-1" [routerLink]="['/editFlats',value.id, value.houseId]">Edit</a>
+          <button type="button" class="btn btn-primary mb-2" [routerLink]="['edit',value.id]">Edit</button>
           <button type="button" class="btn btn-danger mb-2" (click)="deleteFlat(value.id)">Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
-  <button type="button" class="btn btn-primary mb-2" [routerLink]="['/createFlats', currentHouseId]">New</button>
+  <button type="button" class="btn btn-primary mb-2" [routerLink]="['add']">New</button>
 </div>
