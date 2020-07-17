@@ -4,7 +4,7 @@ import { FlatListComponent } from './flat-list/flat-list.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlatRoutingModule } from './flat-routing.module';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlatAddUpdateComponent } from './flat-add-update/flat-add-update.component';
 import { FlatComponent } from './flat/flat.component';
 
@@ -13,6 +13,7 @@ import { FlatComponent } from './flat/flat.component';
     CommonModule,
     TranslateModule,
     FlatRoutingModule,
+    ReactiveFormsModule,
     RouterModule,
     FormsModule,
   ],
