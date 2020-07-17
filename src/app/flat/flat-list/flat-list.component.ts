@@ -26,9 +26,21 @@ export class FlatListComponent implements OnInit {
     this.defaultFlat = new DefaultFlat();
   }
 
-  public deleteFlat(flatId: number) {
-    // я забыла как без lodash и не могу придумать
-    const deleteIndex = _.findIndex(this.flats, { id: flatId });
+
+  ngOnInit() {
+    this.route.parent.params.subscribe(param => {
+      this.currentHouseId = +param.houseId;
+      if (this.currentHouseId) {
+        this.getFlatsFromServer(this.currentHouseId);
+      } else {
+        this.router.navigate(['/']);
+      }
+    });
+  }
+
+  deleteFlat(flatId: number) {
+    // find index which needed to be deleted
+    const deleteIndex = this.flats.findIndex(flat => flat.id === flatId);
     // delete flat from server and on subscribe return it back
     this.flatService.remove(flatId)
       .subscribe( // delete house from array
@@ -39,18 +51,6 @@ export class FlatListComponent implements OnInit {
         }
       );
   }
-
-  ngOnInit() {
-    this.route.params.subscribe(param => {
-      this.currentHouseId = +param.houseId;
-      if (this.currentHouseId) {
-        this.getFlatsFromServer(this.currentHouseId);
-      } else {
-        this.router.navigate(['/']);
-      }
-    });
-  }
-
   private getFlatsFromServer(houseId: number) {
     this.flatService.getByHouseId(houseId)
       .subscribe(

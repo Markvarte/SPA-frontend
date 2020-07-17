@@ -3,18 +3,26 @@ import { CommonModule } from '@angular/common';
 import { FlatListComponent } from './flat-list/flat-list.component';
 import { Routes, RouterModule } from '@angular/router';
 import { extract } from '@app/i18n';
+import { FlatAddUpdateComponent } from './flat-add-update/flat-add-update.component';
+import { FlatComponent } from './flat/flat.component';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: '/', pathMatch: 'full',
-  },
-  {
-    path: ':houseId', component: FlatListComponent, data: { title: extract('Flats') },
-    // children: [
-    //   {
-    //     path: 'add'
-    //   }
-    // ]
+    path: ':houseId', component: FlatComponent,
+    children: [
+      {
+        path: '', redirectTo: 'list', pathMatch: 'full',
+      },
+      {
+        path: 'list', component: FlatListComponent, data: { title: extract('Flats') },
+      },
+      {
+        path: 'add', component: FlatAddUpdateComponent, data: { title: extract('Flat adding') },
+      },
+      {
+        path: 'edit/:flatId', component: FlatAddUpdateComponent, data: { title: extract('Flat adding') },
+      }
+    ]
   },
 ];
 @NgModule({

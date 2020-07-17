@@ -6,6 +6,7 @@ import { FlatRoutingModule } from './flat-routing.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FlatAddUpdateComponent } from './flat-add-update/flat-add-update.component';
+import { FlatComponent } from './flat/flat.component';
 
 @NgModule({
   imports: [
@@ -13,11 +14,12 @@ import { FlatAddUpdateComponent } from './flat-add-update/flat-add-update.compon
     TranslateModule,
     FlatRoutingModule,
     RouterModule,
-    FormsModule
+    FormsModule,
   ],
   declarations: [
     FlatListComponent,
-    FlatAddUpdateComponent
+    FlatAddUpdateComponent,
+    FlatComponent,
   ]
 })
 export class FlatModule { }
