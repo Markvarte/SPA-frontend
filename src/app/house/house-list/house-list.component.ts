@@ -29,7 +29,11 @@ export class HouseListComponent implements OnInit {
     // delete house from server and on subscribe return it back
     this.houseService.remove(houseId)
       .subscribe( // delete house from array
-        () => this.houses.splice(deleteIndex, 1)
+        () => this.houses.splice(deleteIndex, 1),
+        (err: HttpErrorResponse) => { // if errors
+          // TODO: Error message
+          console.log(err.error);
+        }
       );
   }
   ngOnInit() {

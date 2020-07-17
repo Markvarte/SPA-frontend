@@ -1,3 +1,43 @@
-<p>
-  flat-list works!
-</p>
+<div>
+  <button type="button" class="btn btn-primary mb-2" [routerLink]="['']"> Back </button>
+</div>
+<div class="row">
+  <h2> Connected flats</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col"># </th>
+        <th scope="col">Number </th>
+        <th scope="col">Floor </th>
+        <th scope="col">Rooms Count </th>
+        <th scope="col">Tenants Count </th>
+        <th scope="col">Total area </th>
+        <th scope="col">Living area </th>
+        <th scope="col">House ID </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="flats?.length === 0">
+        <td>No data</td>
+      </tr>
+      <tr *ngFor="let value of flats; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ value.num }}</td>
+        <td>{{ value.floor }}</td>
+        <td>{{ value.roomsCount }}</td>
+        <td>{{ value.tenantsCount }}</td>
+        <td>{{ value.totalArea }}</td>
+        <td>{{ value.livingArea }}</td>
+        <td>{{ value.houseId }}</td>
+        <td> <button type="button" class="btn btn-primary mb-2" [routerLink]="[ value.id, 'ten']"
+            routerLinkActive="active">view
+            tenants</button> </td>
+        <td>
+          <a class="m-1" [routerLink]="['/editFlats',value.id, value.houseId]">Edit</a>
+          <button type="button" class="btn btn-danger mb-2" (click)="deleteFlat(value.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary mb-2" [routerLink]="['/createFlats', currentHouseId]">New</button>
+</div>

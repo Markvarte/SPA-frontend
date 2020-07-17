@@ -16,8 +16,7 @@
       </tr>
     </thead>
     <tbody>
-    <tbody>
-      <tr *ngIf="houses?.length == 0">
+      <tr *ngIf="houses?.length === 0">
         <td>No data</td>
       </tr>
       <tr *ngFor="let value of houses; index as i">
