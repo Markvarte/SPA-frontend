@@ -1,3 +1,41 @@
-<p>
-  tenant-list works!
-</p>
+<div>
+  <button type="button" class="btn btn-primary mb-2" (click)="backToFlats()"> Back </button>
+</div>
+<div class="row">
+  <h2> Connected tenants </h2>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col"># </th>
+        <th scope="col">First name </th>
+        <th scope="col">Last name </th>
+        <th scope="col">Personal code </th>
+        <th scope="col">Date of birth </th>
+        <th scope="col">Phone number </th>
+        <th scope="col">eMail </th>
+        <th scope="col">FlatId </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="tenants?.length === 0">
+        <td>No data</td>
+      </tr>
+      <tr *ngFor="let value of tenants; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+      <td> {{ value.firstName }}</td>
+      <td>{{ value.lastName }}</td>
+      <td>{{ value.personalCode }}</td>
+      <td>{{ value.dateOfBirst}}</td>
+      <td>{{ value.phoneNumber }}</td>
+      <td>{{ value.eMail }}</td>
+      <td>{{ value.flatId }}</td>
+      <td>
+        <button type="button" class="btn btn-primary mb-2" [routerLink]="['../edit',value.id]">Edit</button>
+        <button type="submit" class="btn btn-danger mb-2" (click)="deleteTenant(value.id)">Delete</button>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary mb-2" [routerLink]="['../add']">New</button>
+</div>

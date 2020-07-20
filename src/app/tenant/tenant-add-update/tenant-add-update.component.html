@@ -1,3 +1,62 @@
-<p>
-  tenant-add-update works!
-</p>
+<div class="row">
+  <p>
+    <button type="button" class="btn btn-primary" (click)="backToTenants()">Back </button>
+  </p>
+</div>
+<div>
+  <h2> Tenant form</h2>
+  <p *ngIf="isValid && tenantForm.pristine" class="alert alert-success">
+    Form submitted successfully.
+  </p>
+  <form [formGroup]="tenantForm" (ngSubmit)="onFormSubmit()">
+    <div class="form-group">
+      <input type="number" [hidden]='true' formControlName="id">
+      <div class="row">
+        <label class="control-label col-md-2">Tenant first name:</label>
+        <input type="text" formControlName="firstName">
+        <div class="text-danger" *ngIf="tenantForm.get('firstName').errors && tenantForm.get('firstName').touched">
+          required
+        </div>
+      </div>
+
+      <div class="row">
+        <label class="control-label col-md-2">Tenant last name:</label>
+        <input type="text" formControlName="lastName">
+        <div class="text-danger" *ngIf="tenantForm.get('lastName').errors && tenantForm.get('lastName').touched">
+          required
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Personal code:</label>
+        <input type="text" formControlName="personalCode">
+        <div class="text-danger" *ngIf="tenantForm.get('personalCode').errors && tenantForm.get('personalCode').touched">
+          required
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Date of birth:</label>
+        <input type="date" formControlName="dateOfBirst">
+        <div class="text-danger" *ngIf="tenantForm.get('dateOfBirst').errors && tenantForm.get('dateOfBirst').touched">
+          required
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Phone number:</label>
+        <input type="text" formControlName="phoneNumber">
+        <div class="text-danger" *ngIf="tenantForm.get('phoneNumber').errors && tenantForm.get('phoneNumber').touched">
+          required
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">eMail:</label>
+        <input type="email" formControlName="eMail">
+        <div class="text-danger" *ngIf="tenantForm.get('eMail').errors && tenantForm.get('eMail').touched">
+          required
+        </div>
+      </div>
+      <input type="number" [hidden]='true' formControlName="flatId">
+
+      </div>
+    <button type="button" class="btn btn-primary" [disabled]="tenantForm.invalid" (click)="onFormSubmit()">Save</button>
+  </form>
+</div>

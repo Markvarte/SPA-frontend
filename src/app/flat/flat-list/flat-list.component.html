@@ -29,7 +29,7 @@
         <td>{{ value.totalArea }}</td>
         <td>{{ value.livingArea }}</td>
         <td>{{ value.houseId }}</td>
-        <td> <button type="button" class="btn btn-primary mb-2" [routerLink]="[ value.id, 'ten']"
+        <td> <button type="button" class="btn btn-primary mb-2" [routerLink]="[ '/tenants', value.houseId, value.id]"
             routerLinkActive="active">view
             tenants</button> </td>
         <td>

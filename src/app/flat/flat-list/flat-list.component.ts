@@ -27,7 +27,19 @@ export class FlatListComponent implements OnInit {
     this.defaultFlat = new DefaultFlat();
   }
 
-
+  deleteFlat(flatId: number) {
+    // find index which needed to be deleted
+    const deleteIndex = this.flats.findIndex(flat => flat.id === flatId);
+    // delete flat from server and on subscribe return it back
+    this.flatService.remove(flatId)
+      .subscribe( // delete flat from array
+        () => this.flats.splice(deleteIndex, 1),
+        (err: HttpErrorResponse) => { // if errors
+          // TODO: Error message
+          console.log(err.error);
+        }
+      );
+  }
   ngOnInit() {
     this.route.parent.params.subscribe(param => {
       FlatListComponent.currentHouseId = +param.houseId;
@@ -37,20 +49,6 @@ export class FlatListComponent implements OnInit {
         this.router.navigate(['/']);
       }
     });
-  }
-
-  deleteFlat(flatId: number) {
-    // find index which needed to be deleted
-    const deleteIndex = this.flats.findIndex(flat => flat.id === flatId);
-    // delete flat from server and on subscribe return it back
-    this.flatService.remove(flatId)
-      .subscribe( // delete house from array
-        () => this.flats.splice(deleteIndex, 1),
-        (err: HttpErrorResponse) => { // if errors
-          // TODO: Error message
-          console.log(err.error);
-        }
-      );
   }
   private getFlatsFromServer(houseId: number) {
     this.flatService.getByHouseId(houseId)
