@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { House, DefaultHouse } from '../house-interface/default-house';
 import { HouseServiceService } from '../house-service.service';
-import * as _ from 'lodash';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -24,8 +23,8 @@ export class HouseListComponent implements OnInit {
   }
 
   public deleteHouse(houseId: number) {
-    // я забыла как без lodash и не могу придумать
-    const deleteIndex = _.findIndex(this.houses, { id: houseId });
+    // find index which needed to be deleted
+    const deleteIndex = this.houses.findIndex(house => house.id === houseId);
     // delete house from server and on subscribe return it back
     this.houseService.remove(houseId)
       .subscribe( // delete house from array
