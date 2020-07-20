@@ -20,7 +20,7 @@ const routes: Routes = [
         path: 'add', component: FlatAddUpdateComponent, data: { title: extract('Flat adding') },
       },
       {
-        path: 'edit/:flatId', component: FlatAddUpdateComponent, data: { title: extract('Flat adding') },
+        path: 'edit/:flatId', component: FlatAddUpdateComponent, data: { title: extract('Flat editing') },
       },
     ]
   },
