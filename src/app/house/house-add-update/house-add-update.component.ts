@@ -18,8 +18,7 @@ export class HouseAddUpdateComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private houseService: HouseServiceService,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {
     // define default house value
     this.house = new DefaultHouse();
@@ -46,12 +45,12 @@ export class HouseAddUpdateComponent implements OnInit {
       if (this.house.id) { // if number param exist
         // edit mode
         // house contains house from server
-        this.setHouseFromServer(this.house.id);
+        this.getHouseFromServer(this.house.id);
       } // else add mode (form is empty)
     });
   }
 
-  private setHouseFromServer(id: number) {
+  private getHouseFromServer(id: number) {
     // get house from server by its id
     this.houseService.getById(id)
       // if success initialize house

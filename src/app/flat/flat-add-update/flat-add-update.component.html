@@ -1,3 +1,61 @@
-<p>
-  flat-add-update works!
+<div class="row">
+  <p>
+  <button type="button" class="btn btn-primary" (click)="backToFlats()" >Back </button>
 </p>
+</div>
+<div>
+  <h2>Flats form </h2>
+ <p *ngIf="isValid && flatForm.pristine" class="alert alert-success"> 
+    Form submitted successfully.
+  </p> 
+  <form [formGroup]="flatForm" (ngSubmit)="onFormSubmit()">
+    <div class="form-group">
+      <div class="row">
+        <input type="number" [hidden]='true' formControlName="id">
+        <label class="control-label col-md-2">Flat number:</label>      
+        <input type="number" formControlName="num" >
+        <div class="text-danger" *ngIf="flatForm.get('num').errors && flatForm.get('num').touched">
+          required natural number
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Floor:</label>
+        <input type="number" formControlName="floor">
+        <div class="text-danger" *ngIf="flatForm.get('floor').errors && flatForm.get('floor').touched">
+          required natural number
+        </div>
+      </div>
+        <input type="number" [hidden]='true' formControlName="houseId">
+      <div class="row">
+        <label class="control-label col-md-2">Rooms count: </label>
+        <input type="number" formControlName="roomsCount">
+        <div class="text-danger" *ngIf="flatForm.get('roomsCount').errors && flatForm.get('roomsCount').touched">
+          required natural number
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Tenants count:</label>
+        <input type="number" formControlName="tenantsCount">
+        <div class="text-danger" *ngIf="flatForm.get('tenantsCount').errors && flatForm.get('tenantsCount').touched">
+          required natural number
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Total area:</label>
+        <input type="number" formControlName="totalArea">
+        <div class="text-danger" *ngIf="flatForm.get('totalArea').errors && flatForm.get('totalArea').touched">
+          required natural number
+        </div>
+      </div>
+      <div class="row">
+        <label class="control-label col-md-2">Living area:</label>
+        <input type="number" formControlName="livingArea">
+        <div class="text-danger" *ngIf="flatForm.get('livingArea').errors && flatForm.get('livingArea').touched">
+          required natural number
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" [disabled]="flatForm.invalid">Submit </button>
+
+  </form>
+</div>

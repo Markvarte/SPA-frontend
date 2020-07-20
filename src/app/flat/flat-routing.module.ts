@@ -21,7 +21,7 @@ const routes: Routes = [
       },
       {
         path: 'edit/:flatId', component: FlatAddUpdateComponent, data: { title: extract('Flat adding') },
-      }
+      },
     ]
   },
 ];

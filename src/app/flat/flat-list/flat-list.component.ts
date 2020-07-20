@@ -12,11 +12,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class FlatListComponent implements OnInit {
 
+  public static currentHouseId: number;
+  // static for flat-add-update.component
   public flats: Array<Flat>;
   // Array of Flats, which will be displayed
   public defaultFlat: Flat;
   // for initializing default values (all null)
-  public currentHouseId: number;
   constructor(
     private flatService: FlatService,
     private route: ActivatedRoute,
@@ -29,9 +30,9 @@ export class FlatListComponent implements OnInit {
 
   ngOnInit() {
     this.route.parent.params.subscribe(param => {
-      this.currentHouseId = +param.houseId;
-      if (this.currentHouseId) {
-        this.getFlatsFromServer(this.currentHouseId);
+      FlatListComponent.currentHouseId = +param.houseId;
+      if (FlatListComponent.currentHouseId) {
+        this.getFlatsFromServer(FlatListComponent.currentHouseId);
       } else {
         this.router.navigate(['/']);
       }
