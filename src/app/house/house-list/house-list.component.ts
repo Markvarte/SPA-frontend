@@ -36,8 +36,6 @@ export class HouseListComponent implements OnInit {
       );
   }
   ngOnInit() {
-    // Check if houseId is provided. If falsy then
-    // this.router.navigate(['']); <- for flats !
 
     // get house list from server
     this.houseService.get()
