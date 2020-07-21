@@ -24,7 +24,7 @@ export class TenantAddUpdateComponent implements OnInit {
     // checks if input year are less that current year
     const today = new Date(); // initialize current date
     let controlValueYear = 0; // define input year
-    // which are year of birth
+    // which is year of birth
     // if input not null =>
     if (control.value !== null) {
       // get first 4 digits from control value (radix = 10 -> decimal string)
@@ -72,14 +72,8 @@ export class TenantAddUpdateComponent implements OnInit {
     // that why there is absolute route to navigate back
     this.router.navigateByUrl(`/tenants/${this.houseId}/${this.tenant.flatId}`);
   }
-  /*   getCurrentDate() { // test
-      const today = new Date();
-      const previousYear = today.getUTCDate(); // this gets previous year
-      console.log("today is = " + today);
-      console.log("previous Year was = " + previousYear);
-    } */
+
   ngOnInit() {
-    // this.getCurrentDate(); // test
     this.route.params.subscribe(param => {
       this.tenant.id = +param.tenantId;
 
