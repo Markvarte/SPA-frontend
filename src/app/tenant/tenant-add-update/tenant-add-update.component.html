@@ -15,7 +15,7 @@
         <label class="control-label col-md-2">Tenant first name:</label>
         <input type="text" formControlName="firstName">
         <div class="text-danger" *ngIf="tenantForm.get('firstName').errors && tenantForm.get('firstName').touched">
-          required
+          minimal length - 3 characteristics, only letters, spaces and -
         </div>
       </div>
 
@@ -23,35 +23,35 @@
         <label class="control-label col-md-2">Tenant last name:</label>
         <input type="text" formControlName="lastName">
         <div class="text-danger" *ngIf="tenantForm.get('lastName').errors && tenantForm.get('lastName').touched">
-          required
+          minimal length - 3 characteristics, only letters, spaces and -
         </div>
       </div>
       <div class="row">
         <label class="control-label col-md-2">Personal code:</label>
         <input type="text" formControlName="personalCode">
         <div class="text-danger" *ngIf="tenantForm.get('personalCode').errors && tenantForm.get('personalCode').touched">
-          required
+          minimal length - 4 characteristics, only digits and -
         </div>
       </div>
       <div class="row">
         <label class="control-label col-md-2">Date of birth:</label>
         <input type="date" formControlName="dateOfBirst">
         <div class="text-danger" *ngIf="tenantForm.get('dateOfBirst').errors && tenantForm.get('dateOfBirst').touched">
-          required
+          required date input
         </div>
       </div>
       <div class="row">
         <label class="control-label col-md-2">Phone number:</label>
         <input type="text" formControlName="phoneNumber">
         <div class="text-danger" *ngIf="tenantForm.get('phoneNumber').errors && tenantForm.get('phoneNumber').touched">
-          required
+          minimal length - 6 characteristics, only digits
         </div>
       </div>
       <div class="row">
         <label class="control-label col-md-2">eMail:</label>
         <input type="email" formControlName="eMail">
         <div class="text-danger" *ngIf="tenantForm.get('eMail').errors && tenantForm.get('eMail').touched">
-          required
+          required eMail input
         </div>
       </div>
       <input type="number" [hidden]='true' formControlName="flatId">

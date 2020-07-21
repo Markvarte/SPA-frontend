@@ -44,14 +44,14 @@
         <label class="control-label col-md-2">Total area:</label>
         <input type="number" formControlName="totalArea">
         <div class="text-danger" *ngIf="flatForm.get('totalArea').errors && flatForm.get('totalArea').touched">
-          required natural number
+          required real number greater or equal to 15
         </div>
       </div>
       <div class="row">
         <label class="control-label col-md-2">Living area:</label>
         <input type="number" formControlName="livingArea">
         <div class="text-danger" *ngIf="flatForm.get('livingArea').errors && flatForm.get('livingArea').touched">
-          required natural number
+          required real number greater or equal to 15
         </div>
       </div>
     </div>
