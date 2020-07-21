@@ -52,7 +52,14 @@ export class TenantAddUpdateComponent implements OnInit {
     // that why there is absolute route to navigate back
     this.router.navigateByUrl(`/tenants/${this.houseId}/${this.tenant.flatId}`);
   }
+  getCurrentDate() { //test
+    const today = new Date();
+    const previousYear = today.getUTCFullYear() - 1; // this gets previous year
+    console.log("today is = " + today);
+    console.log("previous Year was = " + previousYear);
+  }
   ngOnInit() {
+    this.getCurrentDate(); // test
     this.route.params.subscribe(param => {
       this.tenant.id = +param.tenantId;
       // TODO: need to create static field on tenant list
@@ -71,6 +78,7 @@ export class TenantAddUpdateComponent implements OnInit {
       this.houseId = +parentParam.houseId;
     });
   }
+
 
   private getTenantFromServer(id: number) {
     // get Tenant from server by its id
