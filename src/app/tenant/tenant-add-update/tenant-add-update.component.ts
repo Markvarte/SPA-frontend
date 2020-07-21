@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Tenant, DefaultTenant } from '../tenant-interface/default-tenant';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, ValidationErrors } from '@angular/forms';
 import { TenantService } from '../tenant.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TenantListComponent } from '../tenant-list/tenant-list.component';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -20,6 +19,24 @@ export class TenantAddUpdateComponent implements OnInit {
   public houseId: number = null;
 
   public flatIdSaver: number; // needed for saving flat id
+  static validateDate(control: FormControl): ValidationErrors {
+    // function for validating date
+    // checks if input year are less that current year
+    const today = new Date(); // initialize current date
+    let controlValueYear = 0; // define input year
+    // which are year of birth
+    // if input not null =>
+    if (control.value !== null) {
+      // get first 4 digits from control value (radix = 10 -> decimal string)
+      controlValueYear = parseInt(control.value.substring(0, 4), 10);
+    }
+    // if year of birth greater than (current year - 1) => error
+    if (controlValueYear > (today.getUTCFullYear() - 1)) {
+      return { err: 'Incorrect date' };
+    } // else => null
+    return null;
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private tenantService: TenantService,
@@ -28,6 +45,9 @@ export class TenantAddUpdateComponent implements OnInit {
   ) {
     this.tenant = new DefaultTenant();
     this.createForm();
+  }
+  validate(c: FormControl): ValidationErrors | null {
+    return TenantAddUpdateComponent.validateDate(c);
   }
   public onFormSubmit() {
     if (this.tenantForm.valid) {
@@ -52,18 +72,16 @@ export class TenantAddUpdateComponent implements OnInit {
     // that why there is absolute route to navigate back
     this.router.navigateByUrl(`/tenants/${this.houseId}/${this.tenant.flatId}`);
   }
-  getCurrentDate() { //test
-    const today = new Date();
-    const previousYear = today.getUTCFullYear() - 1; // this gets previous year
-    console.log("today is = " + today);
-    console.log("previous Year was = " + previousYear);
-  }
+  /*   getCurrentDate() { // test
+      const today = new Date();
+      const previousYear = today.getUTCDate(); // this gets previous year
+      console.log("today is = " + today);
+      console.log("previous Year was = " + previousYear);
+    } */
   ngOnInit() {
-    this.getCurrentDate(); // test
+    // this.getCurrentDate(); // test
     this.route.params.subscribe(param => {
       this.tenant.id = +param.tenantId;
-      // TODO: need to create static field on tenant list
-      // this.tenant.flatId = FlatListComponent.currentHouseId;
 
       if (this.tenant.id) {// if number param exist
         // edit mode
@@ -78,8 +96,6 @@ export class TenantAddUpdateComponent implements OnInit {
       this.houseId = +parentParam.houseId;
     });
   }
-
-
   private getTenantFromServer(id: number) {
     // get Tenant from server by its id
     this.tenantService.getById(id)
@@ -107,9 +123,9 @@ export class TenantAddUpdateComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z- ]+$'), Validators.minLength(3)]],
       // only digits and -
       personalCode: ['', [Validators.required, Validators.pattern('^[0-9-]+$'), Validators.minLength(4)]],
-      dateOfBirst: ['', [Validators.required]], // date format
+      dateOfBirst: ['', [Validators.required, TenantAddUpdateComponent.validateDate]], // date format
       // only digits
-      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(6)] ],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(6)]],
       eMail: ['', [Validators.required, Validators.email]], // eMail format
       flatId: [null] // hidden
     });
