@@ -11,7 +11,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./tenant-add-update.component.css']
 })
 export class TenantAddUpdateComponent implements OnInit {
-
   public tenant: Tenant;
   public tenantForm: FormGroup;
   public isValid = false;
