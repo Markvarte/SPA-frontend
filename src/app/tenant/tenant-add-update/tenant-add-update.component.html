@@ -8,14 +8,14 @@
   <p *ngIf="isValid && tenantForm.pristine" class="alert alert-success">
     Form submitted successfully.
   </p>
-  <form [formGroup]="tenantForm" (click)="onFormSubmit()">
+  <form [formGroup]="tenantForm">
     <div class="form-group">
       <input type="number" [hidden]='true' formControlName="id">
       <div class="row">
         <label class="control-label col-md-2">Tenant first name:</label>
         <input type="text" formControlName="firstName">
         <div class="text-danger" *ngIf="tenantForm.get('firstName').errors && tenantForm.get('firstName').touched">
-          minimal length - 3 characteristics, only letters, spaces and -
+          minimal length - 3 characteristics
         </div>
       </div>
 
@@ -23,7 +23,7 @@
         <label class="control-label col-md-2">Tenant last name:</label>
         <input type="text" formControlName="lastName">
         <div class="text-danger" *ngIf="tenantForm.get('lastName').errors && tenantForm.get('lastName').touched">
-          minimal length - 3 characteristics, only letters, spaces and -
+          minimal length - 3 characteristics
         </div>
       </div>
       <div class="row">
@@ -57,6 +57,6 @@
       <input type="number" [hidden]='true' formControlName="flatId">
 
       </div>
-    <button type="button" class="btn btn-primary" [disabled]="tenantForm.invalid" >Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="tenantForm.invalid" (click)="onFormSubmit()">Submit</button>
   </form>
 </div>
