@@ -71,9 +71,9 @@ export class HouseAddUpdateComponent implements OnInit {
     this.houseForm = this.formBuilder.group({
       id: [null], // hidden
       num: [null, [Validators.required, Validators.min(1)]], // natural number: >= 1
-      street: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
-      sity: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(3)]],
-      country: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.minLength(3)]],
+      street: ['', [Validators.required, Validators.minLength(3)]],
+      sity: ['', [Validators.required, Validators.minLength(3)]],
+      country: ['', [Validators.required, Validators.minLength(3)]],
       postCode: ['', [Validators.required, Validators.minLength(4)]],
     });
   }
