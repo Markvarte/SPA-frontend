@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Flat, DefaultFlat } from '../flat-interface/default-flat';
 import { FlatService } from '../flat.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -12,29 +12,37 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class FlatListComponent implements OnInit {
 
-  public static currentHouseId: number;
-  // static for flat-add-update.component
-  public flats: Array<Flat>;
+  // Static for flat-add-update.component
+  static currentHouseId: number;
+  /* // output to TenantList
+  @Output() goToTenantList = new EventEmitter<number>(); */
+  flats: Array<Flat>;
   // Array of Flats, which will be displayed
-  public defaultFlat: Flat;
-  // for initializing default values (all null)
+  defaultFlat: Flat;
+  // For initializing default values (all null)
   constructor(
     private flatService: FlatService,
     private route: ActivatedRoute,
     private router: Router,
   ) {
-    // initializing default values
+    // Initializing default values
     this.defaultFlat = new DefaultFlat();
   }
 
+ /*  public emitCurrentHouseIdToTenantList(currentHouseId: number) {
+    // Method sent currentHouseId to TenantList
+    // because Tenant list button back needs to be navigated to flat list
+    // but flat list route contains currentHouseId.
+    this.goToTenantList.emit(currentHouseId);
+  } */
   deleteFlat(flatId: number) {
-    // find index which needed to be deleted
+    // Find index which needed to be deleted
     const deleteIndex = this.flats.findIndex(flat => flat.id === flatId);
-    // delete flat from server and on subscribe return it back
+    // Delete flat from server and on subscribe return it back
     this.flatService.remove(flatId)
-      .subscribe( // delete flat from array
+      .subscribe( // Delete flat from array
         () => this.flats.splice(deleteIndex, 1),
-        (err: HttpErrorResponse) => { // if errors
+        (err: HttpErrorResponse) => { // If errors
           // TODO: Error message
           console.log(err.error);
         }
