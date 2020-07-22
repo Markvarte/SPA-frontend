@@ -23,7 +23,7 @@ public getById(tenantId: number): Observable<Tenant> {
 
 public getByFlatId(flatId: number): Observable<Array<Tenant>> {
   // returns Tenant which has provided flat id
-  return this.http.get<Array<Tenant>>(environment.serverUrl + '/Tenants/Flat/' + flatId);
+  return this.http.get<Array<Tenant>>(environment.serverUrl + '/Flat/' + flatId + '/Tenants');
 }
 
 public add(tenant: Tenant): Observable<Tenant> {

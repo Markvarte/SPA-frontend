@@ -23,7 +23,7 @@ public getById(flatId: number): Observable<Flat> {
 
 public getByHouseId(houseId: number): Observable<Array<Flat>> {
   // returns flats which has provided house id
-  return this.http.get<Array<Flat>>(environment.serverUrl + '/Flats/House/' + houseId);
+  return this.http.get<Array<Flat>>(environment.serverUrl + '/House/' + houseId + '/Flats');
 }
 
 public add(flat: Flat): Observable<Flat> {
