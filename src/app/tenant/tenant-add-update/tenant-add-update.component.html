@@ -8,7 +8,7 @@
   <p *ngIf="isValid && tenantForm.pristine" class="alert alert-success">
     Form submitted successfully.
   </p>
-  <form [formGroup]="tenantForm" (ngSubmit)="onFormSubmit()">
+  <form [formGroup]="tenantForm" (click)="onFormSubmit()">
     <div class="form-group">
       <input type="number" [hidden]='true' formControlName="id">
       <div class="row">
@@ -57,6 +57,6 @@
       <input type="number" [hidden]='true' formControlName="flatId">
 
       </div>
-    <button type="button" class="btn btn-primary" [disabled]="tenantForm.invalid" (click)="onFormSubmit()">Save</button>
+    <button type="button" class="btn btn-primary" [disabled]="tenantForm.invalid" >Submit</button>
   </form>
 </div>
