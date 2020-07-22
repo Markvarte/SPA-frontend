@@ -53,6 +53,7 @@ export class FlatAddUpdateComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.flat.id = +param.flatId;
 
+      // TODO: ну кароче статик не нужен 💩💩💩
       this.flat.houseId = FlatListComponent.currentHouseId;
 
       if (this.flat.id) {// if number param exist
