@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Tenant, DefaultTenant } from '../tenant-interface/default-tenant';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TenantService } from '../tenant.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FlatListComponent } from '@app/flat/flat-list/flat-list.component';
 
 @Component({
   selector: 'app-tenant-list',
@@ -10,12 +11,13 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./tenant-list.component.css']
 })
 export class TenantListComponent implements OnInit {
-  public tenants: Array<Tenant>;
+
   // Array of tenants, which will be displayed
-  public defaultTenant: Tenant;
+  public tenants: Array<Tenant>;
   // for initializing default values (null and empty strings)
-  public currentHouseId: number;
-  // needed for navigation
+  public defaultTenant: Tenant;
+/*   // needed for navigation
+  @Input() currentHouseId: number; */
   constructor(
     private tenantService: TenantService,
     private route: ActivatedRoute,
@@ -24,8 +26,8 @@ export class TenantListComponent implements OnInit {
     // initializing default values
     this.defaultTenant = new DefaultTenant();
   }
-  public backToFlats() {
-    this.router.navigate(['/flats/', this.currentHouseId]);
+  public backToFlats() { // PROBLEM
+    this.router.navigate(['/flats/', 88]);
   }
   public deleteTenant(tenantId: number) {
     // find index which needed to be deleted

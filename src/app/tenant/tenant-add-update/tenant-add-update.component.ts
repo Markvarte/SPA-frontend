@@ -11,29 +11,18 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./tenant-add-update.component.css']
 })
 export class TenantAddUpdateComponent implements OnInit {
-  public tenant: Tenant;
+  tenant: Tenant;
   public tenantForm: FormGroup;
-  public isValid = false;
   // for displaying "submitted successfully" alert
+  /**
+   * for displaying "submitted successfully" alert
+   *
+   * @memberof TenantAddUpdateComponent
+   */
+  public isValid = false;
 
   public flatIdSaver: number; // needed for saving flat id
-  static validateDate(control: FormControl): ValidationErrors {
-    // function for validating date
-    // checks if input year are less that current year
-    const today = new Date(); // initialize current date
-    let controlValueYear = 0; // define input year
-    // which is year of birth
-    // if input not null =>
-    if (control.value !== null) {
-      // get first 4 digits from control value (radix = 10 -> decimal string)
-      controlValueYear = parseInt(control.value.substring(0, 4), 10);
-    }
-    // if year of birth greater than (current year - 1) => error
-    if (controlValueYear > (today.getUTCFullYear() - 1)) {
-      return { err: 'Incorrect date' };
-    } // else => null
-    return null;
-  }
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,9 +33,7 @@ export class TenantAddUpdateComponent implements OnInit {
     this.tenant = new DefaultTenant();
     this.createForm();
   }
-  validate(c: FormControl): ValidationErrors | null {
-    return TenantAddUpdateComponent.validateDate(c);
-  }
+
   public onFormSubmit() {
     if (this.tenantForm.valid) {
       // if valid => flat data contains submitted form data
@@ -54,10 +41,11 @@ export class TenantAddUpdateComponent implements OnInit {
       this.tenant = this.tenantForm.value;
       // after form value assigned to this.tenant, this.tenant.id and flatId become null
       this.tenant.flatId = this.flatIdSaver;
-      // if form not contains id
+      // if form DOES NOT contains id then we are adding tenant
       if (!this.tenantForm.value.id) {
         this.addTenant(this.tenant);
-      } else { // if form contains id
+      } else {
+        // if form contains id then we are updating tenant
         this.updateTenant(this.tenant);
       }
       this.isValid = true; // for message "Form submitted successfully."
@@ -68,7 +56,7 @@ export class TenantAddUpdateComponent implements OnInit {
     // segments 'edit/id' and 'add' can't be navigated just by '../',
     // because edit goes to /edit route and add goes to list route.
     // that why there is absolute route to navigate back
-    this.router.navigateByUrl(`/tenants/${this.tenant.flatId}`);
+    this.router.navigateByUrl(`/tenants/${this.tenant.flatId}/list`);
   }
 
   ngOnInit() {
@@ -114,7 +102,7 @@ export class TenantAddUpdateComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z- ]+$'), Validators.minLength(3)]],
       // only digits and -
       personalCode: ['', [Validators.required, Validators.pattern('^[0-9-]+$'), Validators.minLength(4)]],
-      dateOfBirst: ['', [Validators.required, TenantAddUpdateComponent.validateDate]], // date format
+      dateOfBirst: ['', [Validators.required, this.validateDate]], // date format
       // only digits
       phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(6)]],
       eMail: ['', [Validators.required, Validators.email]], // eMail format
@@ -139,5 +127,23 @@ export class TenantAddUpdateComponent implements OnInit {
       .subscribe(newTenant => { this.tenant = newTenant; },
         // if errors console.log it
         (err: HttpErrorResponse) => console.log(err.error));
+  }
+
+  private validateDate(control: FormControl): ValidationErrors {
+    // function for validating date
+    // checks if input year are less that current year
+    const today = new Date(); // initialize current date
+    let controlValueYear = 0; // define input year
+    // which is year of birth
+    // if input not null =>
+    if (control.value !== null) {
+      // get first 4 digits from control value (radix = 10 -> decimal string)
+      controlValueYear = parseInt(control.value.substring(0, 4), 10);
+    }
+    // if year of birth greater than (current year - 1) => error
+    if (controlValueYear > (today.getUTCFullYear() - 1)) {
+      return { err: 'Incorrect date' };
+    } // else => null
+    return null;
   }
 }
