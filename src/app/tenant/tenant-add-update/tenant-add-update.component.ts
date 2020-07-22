@@ -12,16 +12,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class TenantAddUpdateComponent implements OnInit {
   tenant: Tenant;
-  public tenantForm: FormGroup;
-  // for displaying "submitted successfully" alert
+  tenantForm: FormGroup;
   /**
    * for displaying "submitted successfully" alert
    *
    * @memberof TenantAddUpdateComponent
    */
-  public isValid = false;
+  isValid = false;
 
-  public flatIdSaver: number; // needed for saving flat id
+  flatIdSaver: number; // needed for saving flat id
 
 
   constructor(
@@ -34,7 +33,7 @@ export class TenantAddUpdateComponent implements OnInit {
     this.createForm();
   }
 
-  public onFormSubmit() {
+  onFormSubmit() {
     if (this.tenantForm.valid) {
       // if valid => flat data contains submitted form data
       this.flatIdSaver = this.tenant.flatId;
@@ -52,7 +51,7 @@ export class TenantAddUpdateComponent implements OnInit {
       this.tenantForm.reset(); // clean form
     }
   }
-  public backToTenants() {
+  backToTenants() {
     // segments 'edit/id' and 'add' can't be navigated just by '../',
     // because edit goes to /edit route and add goes to list route.
     // that why there is absolute route to navigate back
@@ -61,6 +60,7 @@ export class TenantAddUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(param => {
+      //  '+' === 'parseToInt(...)'
       this.tenant.id = +param.tenantId;
 
       if (this.tenant.id) {// if number param exist
@@ -72,6 +72,7 @@ export class TenantAddUpdateComponent implements OnInit {
     });
     // and need to save flatId for adding
     this.route.parent.params.subscribe(parentParam => {
+      //  '+' === 'parseToInt(...)'
       this.tenant.flatId = +parentParam.flatId;
     });
   }
@@ -96,10 +97,8 @@ export class TenantAddUpdateComponent implements OnInit {
   private createForm() {
     this.tenantForm = this.formBuilder.group({
       id: [null], // hidden
-      // only letters, spaces and -
-      firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z- ]+$'), Validators.minLength(3)]],
-      // only letters, spaces and -
-      lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z- ]+$'), Validators.minLength(3)]],
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.minLength(3)]],
       // only digits and -
       personalCode: ['', [Validators.required, Validators.pattern('^[0-9-]+$'), Validators.minLength(4)]],
       dateOfBirst: ['', [Validators.required, this.validateDate]], // date format
@@ -115,7 +114,10 @@ export class TenantAddUpdateComponent implements OnInit {
     this.tenantService.update(tenant)
       // if success Tenant on front updates too
       // (this is not really necessary, but what i need to do with returned updated Tenant?)
-      .subscribe(newTenant => { this.tenant = newTenant; },
+      .subscribe(newTenant => {
+        this.tenant = newTenant;
+        this.router.navigateByUrl(`/tenants/${this.tenant.flatId}/list`);
+       },
         // if errors console.log it
         (err: HttpErrorResponse) => console.log(err.error));
   }

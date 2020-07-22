@@ -13,9 +13,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class FlatAddUpdateComponent implements OnInit {
 
-  public flat: Flat;
-  public flatForm: FormGroup;
-  public isValid = false;
+  flat: Flat;
+  flatForm: FormGroup;
+  isValid = false;
   // for displaying "submitted successfully" alert
 
   constructor(
@@ -27,7 +27,7 @@ export class FlatAddUpdateComponent implements OnInit {
     this.flat = new DefaultFlat();
     this.createForm();
   }
-  public onFormSubmit() {
+  onFormSubmit() {
     if (this.flatForm.valid) {
       // if valid => flat data contains submitted form data
       this.flat = this.flatForm.value;
@@ -43,7 +43,7 @@ export class FlatAddUpdateComponent implements OnInit {
       this.flatForm.reset(); // clean form
     }
   }
-  public backToFlats() {
+  backToFlats() {
     // segments 'edit/id' and 'add' can't be navigated just by '../',
     // because edit goes to /edit route and add goes to list route.
     // that why there is absolute route t0 navigate back
@@ -51,6 +51,7 @@ export class FlatAddUpdateComponent implements OnInit {
   }
   ngOnInit() {
     this.route.params.subscribe(param => {
+      //  '+' === 'parseToInt(...)'
       this.flat.id = +param.flatId;
 
       // TODO: ну кароче статик не нужен 💩💩💩
@@ -76,7 +77,7 @@ export class FlatAddUpdateComponent implements OnInit {
         this.fillForm(this.flat);
       },
         // if errors console.log it
-     (err: HttpErrorResponse) => console.log(err.error));
+        (err: HttpErrorResponse) => console.log(err.error));
   }
   private fillForm(flat: Flat) {
     // method fill in form with flat data for editing
@@ -98,19 +99,22 @@ export class FlatAddUpdateComponent implements OnInit {
   private updateFlat(flat: Flat) {
     // method updates flat on server
     this.flatService.update(flat)
-    // if success flat on front updates too
-    // (this is not really necessary, but what i need to do with returned updated flat?)
-      .subscribe(newFlat => { this.flat = newFlat ; },
+      // if success flat on front updates too
+      // (this is not really necessary, but what i need to do with returned updated flat?)
+      .subscribe(newFlat => {
+        this.flat = newFlat;
+        this.router.navigateByUrl(`/flats/${FlatListComponent.currentHouseId}`);
+      },
         // if errors console.log it
         (err: HttpErrorResponse) => console.log(err.error));
   }
   private addFlat(flat: Flat) {
     // method adds flat on server
     this.flatService.add(flat)
-    // if success flat on front updates too
-    // (this is not really necessary, but what i need to do with returned new flat?)
-      .subscribe( newFlat  => { this.flat = newFlat ; },
+      // if success flat on front updates too
+      // (this is not really necessary, but what i need to do with returned new flat?)
+      .subscribe(newFlat => { this.flat = newFlat; },
         // if errors console.log it
-       (err: HttpErrorResponse) => console.log(err.error));
+        (err: HttpErrorResponse) => console.log(err.error));
   }
 }

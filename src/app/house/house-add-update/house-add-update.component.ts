@@ -13,18 +13,19 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class HouseAddUpdateComponent implements OnInit {
 
   house: House; // current house data
-  public isValid = false;
-  public houseForm: FormGroup;
+  isValid = false;
+  houseForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
     private houseService: HouseServiceService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
     // define default house value
     this.house = new DefaultHouse();
     this.createForm();
   }
-  public onFormSubmit() {
+  onFormSubmit() {
     if (this.houseForm.valid) {
       // if valid => house data contains submitted form data
       this.house = this.houseForm.value;
@@ -41,6 +42,7 @@ export class HouseAddUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(param => {
+      //  '+' === 'parseToInt(...)'
       this.house.id = +param.houseId;
       if (this.house.id) { // if number param exist
         // edit mode
@@ -81,18 +83,21 @@ export class HouseAddUpdateComponent implements OnInit {
   private updateHouse(house: House) {
     // method updates house on server
     this.houseService.update(house)
-    // if success house on front updates too
-    // (this is not really necessary, but what i need to do with returned updated house?)
-      .subscribe(newHouse => { this.house = newHouse; },
+      // if success house on front updates too
+      // (this is not really necessary, but what i need to do with returned updated house?)
+      .subscribe(newHouse => {
+        this.house = newHouse;
+        this.router.navigate(['/']);
+      },
         // if errors console.log it
         (err: HttpErrorResponse) => console.log(err.error));
   }
   private addHouse(house: House) {
     // method adds house on server
     this.houseService.add(house)
-    // if success house on front updates too
-    // (this is not really necessary, but what i need to do with returned new house?)
-      .subscribe( newHouse => { this.house = newHouse; },
+      // if success house on front updates too
+      // (this is not really necessary, but what i need to do with returned new house?)
+      .subscribe(newHouse => { this.house = newHouse; },
         // if errors console.log it
         (err: HttpErrorResponse) => console.log(err.error));
   }
