@@ -7,7 +7,7 @@ import { TenantListComponent } from './tenant-list/tenant-list.component';
 import { TenantAddUpdateComponent } from './tenant-add-update/tenant-add-update.component';
 const routes: Routes = [
   {
-    path: ':houseId/:flatId', component: TenantComponent,
+    path: ':flatId', component: TenantComponent,
     children: [
       {
         path: '', redirectTo: 'list', pathMatch: 'full',

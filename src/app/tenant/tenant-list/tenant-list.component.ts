@@ -42,8 +42,7 @@ export class TenantListComponent implements OnInit {
   }
   ngOnInit() {
     this.route.parent.params.subscribe(param => {
-      this.currentHouseId = param.houseId; // needed for navigation back to flats
-      if (param.houseId && param.flatId) {
+      if (param.flatId) {
         this.getTenantsFromServer(param.flatId);
       } else {
         this.router.navigate(['/']);

@@ -15,7 +15,6 @@ export class TenantAddUpdateComponent implements OnInit {
   public tenantForm: FormGroup;
   public isValid = false;
   // for displaying "submitted successfully" alert
-  public houseId: number = null;
 
   public flatIdSaver: number; // needed for saving flat id
   static validateDate(control: FormControl): ValidationErrors {
@@ -69,7 +68,7 @@ export class TenantAddUpdateComponent implements OnInit {
     // segments 'edit/id' and 'add' can't be navigated just by '../',
     // because edit goes to /edit route and add goes to list route.
     // that why there is absolute route to navigate back
-    this.router.navigateByUrl(`/tenants/${this.houseId}/${this.tenant.flatId}`);
+    this.router.navigateByUrl(`/tenants/${this.tenant.flatId}`);
   }
 
   ngOnInit() {
@@ -83,10 +82,9 @@ export class TenantAddUpdateComponent implements OnInit {
         this.getTenantFromServer(this.tenant.id);
       } // else add mode (form is empty)
     });
-    // and need to save houseId and flatId anyway
+    // and need to save flatId for adding
     this.route.parent.params.subscribe(parentParam => {
       this.tenant.flatId = +parentParam.flatId;
-      this.houseId = +parentParam.houseId;
     });
   }
   private getTenantFromServer(id: number) {
