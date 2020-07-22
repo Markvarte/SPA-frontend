@@ -14,7 +14,6 @@
         <th scope="col">Date of birth </th>
         <th scope="col">Phone number </th>
         <th scope="col">eMail </th>
-        <th scope="col">FlatId </th>
       </tr>
     </thead>
     <tbody>
@@ -29,7 +28,6 @@
       <td>{{ value.dateOfBirst}}</td>
       <td>{{ value.phoneNumber }}</td>
       <td>{{ value.eMail }}</td>
-      <td>{{ value.flatId }}</td>
       <td>
         <button type="button" class="btn btn-primary mb-2" [routerLink]="['../edit',value.id]">Edit</button>
         <button type="submit" class="btn btn-danger mb-2" (click)="deleteTenant(value.id)">Delete</button>
