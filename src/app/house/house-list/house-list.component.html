@@ -8,8 +8,8 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Number </th>
         <th scope="col">Street </th>
+        <th scope="col">Number </th>
         <th scope="col">Sity </th>
         <th scope="col">Country </th>
         <th scope="col">Post Code </th>
@@ -21,8 +21,8 @@
       </tr>
       <tr *ngFor="let value of houses; index as i">
         <th scope="row">{{ i + 1 }}</th>
-        <td>{{ value.num }}</td>
         <td>{{ value.street }}</td>
+        <td>{{ value.num }}</td>
         <td>{{ value.sity }}</td>
         <td>{{ value.country }}</td>
         <td>{{ value.postCode }}</td>
