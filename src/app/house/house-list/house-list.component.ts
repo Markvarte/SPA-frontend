@@ -11,9 +11,9 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./house-list.component.css']
 })
 export class HouseListComponent implements OnInit {
-  public houses: Array<House>;
+  houses: Array<House>;
   // Array of Houses, which will be displayed
-  public defaultHouse: House;
+  defaultHouse: House;
   // for initializing default values (null and empty strings)
   constructor(
     private houseService: HouseServiceService,
@@ -22,7 +22,7 @@ export class HouseListComponent implements OnInit {
     this.defaultHouse = new DefaultHouse();
   }
 
-  public deleteHouse(houseId: number) {
+  deleteHouse(houseId: number) {
     // find index which needed to be deleted
     const deleteIndex = this.houses.findIndex(house => house.id === houseId);
     // delete house from server and on subscribe return it back

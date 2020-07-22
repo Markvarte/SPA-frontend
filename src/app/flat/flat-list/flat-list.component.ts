@@ -29,7 +29,7 @@ export class FlatListComponent implements OnInit {
     this.defaultFlat = new DefaultFlat();
   }
 
- /*  public emitCurrentHouseIdToTenantList(currentHouseId: number) {
+ /*   emitCurrentHouseIdToTenantList(currentHouseId: number) {
     // Method sent currentHouseId to TenantList
     // because Tenant list button back needs to be navigated to flat list
     // but flat list route contains currentHouseId.
@@ -50,6 +50,7 @@ export class FlatListComponent implements OnInit {
   }
   ngOnInit() {
     this.route.parent.params.subscribe(param => {
+      //  '+' === 'parseToInt(...)'
       FlatListComponent.currentHouseId = +param.houseId;
       if (FlatListComponent.currentHouseId) {
         this.getFlatsFromServer(FlatListComponent.currentHouseId);

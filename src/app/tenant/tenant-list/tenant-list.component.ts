@@ -13,9 +13,9 @@ import { FlatListComponent } from '@app/flat/flat-list/flat-list.component';
 export class TenantListComponent implements OnInit {
 
   // Array of tenants, which will be displayed
-  public tenants: Array<Tenant>;
+  tenants: Array<Tenant>;
   // for initializing default values (null and empty strings)
-  public defaultTenant: Tenant;
+  defaultTenant: Tenant;
 /*   // needed for navigation
   @Input() currentHouseId: number; */
   constructor(
@@ -26,10 +26,10 @@ export class TenantListComponent implements OnInit {
     // initializing default values
     this.defaultTenant = new DefaultTenant();
   }
-  public backToFlats() { // PROBLEM
-    this.router.navigate(['/flats/', 88]);
+  backToFlats() { // PROBLEM there to find houseID
+   // this.router.navigate(['/flats/', 88]);
   }
-  public deleteTenant(tenantId: number) {
+  deleteTenant(tenantId: number) {
     // find index which needed to be deleted
     const deleteIndex = this.tenants.findIndex(tenant => tenant.id === tenantId);
     // delete tenant from server and on subscribe return it back
