@@ -11,7 +11,8 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./tenant-add-update.component.css']
 })
 export class TenantAddUpdateComponent implements OnInit {
-  tenant: Tenant;
+  tenant: DefaultTenant; // can be used like interface
+  // (but the class can initialize default value)
   tenantForm: FormGroup;
   /**
    * for displaying "submitted successfully" alert
