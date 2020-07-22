@@ -3,7 +3,6 @@ import { Tenant, DefaultTenant } from '../tenant-interface/default-tenant';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TenantService } from '../tenant.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FlatListComponent } from '@app/flat/flat-list/flat-list.component';
 
 @Component({
   selector: 'app-tenant-list',
@@ -14,29 +13,30 @@ export class TenantListComponent implements OnInit {
 
   // Array of tenants, which will be displayed
   tenants: Array<Tenant>;
-  // for initializing default values (null and empty strings)
+  // For initializing default values (null and empty strings)
   defaultTenant: Tenant;
-/*   // needed for navigation
-  @Input() currentHouseId: number; */
   constructor(
     private tenantService: TenantService,
     private route: ActivatedRoute,
     private router: Router,
   ) {
-    // initializing default values
+    // Initializing default values
     this.defaultTenant = new DefaultTenant();
   }
-  backToFlats() { // PROBLEM there to find houseID
-   // this.router.navigate(['/flats/', 88]);
+  backToFlats() {
+    // HouseId is the same for all tenants in the list, so
+    // There is no difference take it from [0] elements or [1] ...
+    console.log("house id is = " + this.tenants[0].houseId);
+    this.router.navigate(['/flats/', this.tenants[0].houseId]);
   }
   deleteTenant(tenantId: number) {
-    // find index which needed to be deleted
+    // Find index which needed to be deleted
     const deleteIndex = this.tenants.findIndex(tenant => tenant.id === tenantId);
-    // delete tenant from server and on subscribe return it back
+    // Delete tenant from server and on subscribe return it back
     this.tenantService.remove(tenantId)
-      .subscribe( // delete tenant from array
+      .subscribe( // Delete tenant from array
         () => this.tenants.splice(deleteIndex, 1),
-        (err: HttpErrorResponse) => { // if errors
+        (err: HttpErrorResponse) => { // If errors
           // TODO: Error message
           console.log(err.error);
         }
@@ -59,7 +59,7 @@ export class TenantListComponent implements OnInit {
           this.tenants = data;
         },
         (err: HttpErrorResponse) => {
-          // if errors -> navigate to root
+          // If errors -> navigate to root
           this.router.navigate(['/']);
         }
       );

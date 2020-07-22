@@ -3,18 +3,20 @@ export interface Tenant {
     firstName: string;
     lastName: string;
     personalCode: string;
-    dateOfBirst: string; // birth, i know, but i very don't wanna delete database on server again((
+    dateOfBirst: string; // Birth, i know, but i very don't wanna delete database on server again((
     phoneNumber: string;
     eMail: string;
     flatId: number;
+    houseId: number; // Needed for navigation back to Flat list
 }
-export class DefaultTenant {
+export class DefaultTenant implements Tenant {
     id: number = null;
     firstName = '';
     lastName = '';
     personalCode = '';
-    dateOfBirst = ''; // birth, i know, but i very don't wanna delete database on server again((
+    dateOfBirst = ''; // Birth, i know, but i very don't wanna delete database on server again((
     phoneNumber = '';
     eMail = '';
     flatId: number = null;
+    houseId: number = null;
 }
