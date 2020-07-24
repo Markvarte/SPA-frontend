@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlatAddUpdateComponent } from './flat-add-update/flat-add-update.component';
 import { FlatComponent } from './flat/flat.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { FlatComponent } from './flat/flat.component';
     FlatRoutingModule,
     ReactiveFormsModule,
     RouterModule,
+    NgbModalModule,
     FormsModule,
   ],
   declarations: [

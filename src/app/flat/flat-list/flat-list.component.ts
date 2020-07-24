@@ -4,6 +4,8 @@ import { FlatService } from '../flat.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as _ from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DeleteModalComponent } from '@app/modal/delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-flat-list',
@@ -22,9 +24,16 @@ export class FlatListComponent implements OnInit {
     private flatService: FlatService,
     private route: ActivatedRoute,
     private router: Router,
+    private modalService: NgbModal,
   ) {
     // Initializing default values
     this.defaultFlat = new DefaultFlat();
+  }
+  open(id: number) {
+    const confirmModal = this.modalService.open(DeleteModalComponent);
+    confirmModal.result.then(() => {
+      this.deleteFlat(id);
+    }, () => { });
   }
 
   deleteFlat(flatId: number) {

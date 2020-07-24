@@ -7,6 +7,7 @@ import { TenantRoutingModule } from './tenant-routing.module';
 import { TenantComponent } from './tenant/tenant.component';
 import { TenantListComponent } from './tenant-list/tenant-list.component';
 import { TenantAddUpdateComponent } from './tenant-add-update/tenant-add-update.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { TenantAddUpdateComponent } from './tenant-add-update/tenant-add-update.
     ReactiveFormsModule,
     RouterModule,
     FormsModule,
+    NgbModalModule,
   ],
   declarations: [
     TenantListComponent,
