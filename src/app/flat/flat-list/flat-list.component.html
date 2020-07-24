@@ -1,3 +1,7 @@
+<div class="row" class="text-center">
+  <h2 *ngIf="flats?.length !== null"> {{ flats[0].houseStreet }}, {{ flats[0].houseNum }} </h2>
+</div>
+
 <div>
   <button type="button" class="btn btn-primary mb-2" [routerLink]="['']"> Back </button>
 </div>
@@ -29,7 +33,7 @@
         <td>{{ value.livingArea }}</td>
         <td> <button type="button" class="btn btn-primary mb-2" [routerLink]="[ '/tenants', value.id]"
             routerLinkActive="active">view
-            tenants</button> </td>
+            tenants</button> </td> 
         <td>
           <button type="button" class="btn btn-primary mb-2" [routerLink]="['../edit',value.id]">Edit</button>
           <button type="button" class="btn btn-danger mb-2" (click)="deleteFlat(value.id)">Delete</button>

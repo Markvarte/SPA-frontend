@@ -1,3 +1,4 @@
+
 <div class="row">
   <p>
   <button type="button" class="btn btn-primary" (click)="backToFlats()" >Back </button>
@@ -12,6 +13,8 @@
     <div class="form-group">
       <div class="row">
         <input type="number" [hidden]='true' formControlName="id">
+        <input type="number" [hidden]='true' formControlName="houseNum">
+        <input type="number" [hidden]='true' formControlName="houseStreet">
         <label class="control-label col-md-2">Flat number:</label>      
         <input type="number" formControlName="num" >
         <div class="text-danger" *ngIf="flatForm.get('num').errors && flatForm.get('num').touched">
