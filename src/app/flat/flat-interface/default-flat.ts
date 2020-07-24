@@ -1,3 +1,5 @@
+import { Tenant } from '@app/tenant/tenant-interface/default-tenant';
+
 export interface Flat {
 
     id: number;
@@ -8,6 +10,8 @@ export interface Flat {
     totalArea: number;
     livingArea: number;
     houseId: number;
+    houseNum: number;
+    houseStreet: string;
 }
 export class DefaultFlat implements Flat {
     id: number = null;
@@ -18,4 +22,6 @@ export class DefaultFlat implements Flat {
     totalArea: number = null;
     livingArea: number = null;
     houseId: number = null;
+    houseNum: number = null;
+    houseStreet = '';
 }
