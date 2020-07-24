@@ -1,67 +1,102 @@
+<html lang="en">
 
-<div class="row">
-  <p>
-    <button type="button" class="btn btn-primary" (click)="backToTenants()">Back </button>
-  </p>
-</div>
-<div>
-  <h2> Tenant form</h2>
-  <p *ngIf="isValid && tenantForm.pristine" class="alert alert-success">
-    Form submitted successfully.
-  </p>
-  <form [formGroup]="tenantForm">
-    <div class="form-group">
-      <input type="number" [hidden]='true' formControlName="id">
-      <div class="row">
-        <label class="control-label col-md-2">Tenant first name:</label>
-        <input type="text" formControlName="firstName">
-        <div class="text-danger" *ngIf="tenantForm.get('firstName').errors && tenantForm.get('firstName').touched">
-          minimal length - 3 characteristics
-        </div>
-      </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-      <div class="row">
-        <label class="control-label col-md-2">Tenant last name:</label>
-        <input type="text" formControlName="lastName">
-        <div class="text-danger" *ngIf="tenantForm.get('lastName').errors && tenantForm.get('lastName').touched">
-          minimal length - 3 characteristics
-        </div>
-      </div>
-      <div class="row">
-        <label class="control-label col-md-2">Personal code:</label>
-        <input type="text" formControlName="personalCode">
-        <div class="text-danger" *ngIf="tenantForm.get('personalCode').errors && tenantForm.get('personalCode').touched">
-          minimal length - 4 characteristics, only digits and -
-        </div>
-      </div>
-      <div class="row">
-        <label class="control-label col-md-2">Date of birth:</label>
-        <input type="date" formControlName="dateOfBirst">
-        <div class="text-danger" *ngIf="tenantForm.get('dateOfBirst').errors && tenantForm.get('dateOfBirst').touched">
-          required correct date of birth input
-        </div>
-      </div>
-      <div class="row">
-        <label class="control-label col-md-2">Phone number:</label>
-        <input type="text" formControlName="phoneNumber">
-        <div class="text-danger" *ngIf="tenantForm.get('phoneNumber').errors && tenantForm.get('phoneNumber').touched">
-          minimal length - 6 characteristics, only digits
-        </div>
-      </div>
-      <div class="row">
-        <label class="control-label col-md-2">eMail:</label>
-        <input type="email" formControlName="eMail">
-        <div class="text-danger" *ngIf="tenantForm.get('eMail').errors && tenantForm.get('eMail').touched">
-          required eMail input
-        </div>
-      </div>
-      <input type="number" [hidden]='true' formControlName="flatId">
-      <input type="number" [hidden]='true' formControlName="flatNum">
-      <input type="number" [hidden]='true' formControlName="houseId">
-      <input type="number" [hidden]='true' formControlName="houseNum">
-      <input type="number" [hidden]='true' formControlName="houseStreet">
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/checkout/">
 
+
+  <link href="/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+  <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="manifest" href="/docs/4.5/assets/img/favicons/manifest.json">
+  <link rel="mask-icon" href="/docs/4.5/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+  <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
+  <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
+  <meta name="theme-color" content="#563d7c">
+
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-md-8 order-md-1">
+        <div class="row">
+          <h2>Tenant form </h2>
+        </div>
+        <div class="row">
+          <p>
+            <button type="button" class="btn btn-primary" (click)="backToTenants()">Back </button>
+          </p>
+        </div>
+        <div class="row">
+          <p *ngIf="isValid && tenantForm.pristine" class="alert alert-success">
+            Form submitted successfully.
+          </p>
+        </div>
+        <form novalidate="" [formGroup]="tenantForm">
+          <div class="row">
+            <label for="firstName">First name: </label>
+            <input type="text" class="form-control" [class.is-invalid]="tenantForm.get('firstName').errors && tenantForm.get('firstName').touched" formControlName="firstName">
+            <div class="invalid-feedback"
+              *ngIf="tenantForm.get('firstName').errors && tenantForm.get('firstName').touched">
+              Valid first name is required.
+            </div>
+
+            <label for="lastName">Last name: </label>
+            <input type="text" class="form-control" [class.is-invalid]="tenantForm.get('lastName').invalid && tenantForm.get('lastName').touched"
+              formControlName="lastName">
+            <div class="invalid-feedback"
+              *ngIf="tenantForm.get('lastName').errors && tenantForm.get('lastName').touched">
+              Valid last name is required.
+            </div>
+
+            <label>Personal code:</label>
+            <input type="text" formControlName="personalCode" class="form-control" [class.is-invalid]="tenantForm.get('personalCode').errors && tenantForm.get('personalCode').touched">
+            <div class="invalid-feedback"
+              *ngIf="tenantForm.get('personalCode').errors && tenantForm.get('personalCode').touched">
+              minimal length - 4 characteristics, only digits and -
+            </div>
+
+            <label>Date of birth:</label>
+            <input type="date" formControlName="dateOfBirst" class="form-control" [class.is-invalid]="tenantForm.get('dateOfBirst').errors && tenantForm.get('dateOfBirst').touched">
+            <div class="invalid-feedback"
+              *ngIf="tenantForm.get('dateOfBirst').errors && tenantForm.get('dateOfBirst').touched">
+              required correct date of birth input
+            </div>
+
+            <label for="phoneNumber"> Phone number: </label>
+            <input type="text" formControlName="phoneNumber" class="form-control" [class.is-invalid]="tenantForm.get('phoneNumber').errors && tenantForm.get('phoneNumber').touched">
+            <div class="invalid-feedback"
+              *ngIf="tenantForm.get('phoneNumber').errors && tenantForm.get('phoneNumber').touched">
+              minimal length - 6 characteristics, only digits
+            </div>
+
+            <label for="eMail">Email: </label>
+            <input type="email" class="form-control" formControlName="eMail" placeholder="you@example.com" [class.is-invalid]="tenantForm.get('eMail').errors && tenantForm.get('eMail').touched">
+            <div class="invalid-feedback" *ngIf="tenantForm.get('eMail').errors && tenantForm.get('eMail').touched">
+              Please enter a valid email address.
+            </div>
+
+
+          </div>
+          <div class="row">
+            <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="tenantForm.invalid"
+              (click)="onFormSubmit()">Submit</button>
+          </div>
+        </form>
       </div>
-    <button type="submit" class="btn btn-primary" [disabled]="tenantForm.invalid" (click)="onFormSubmit()">Submit</button>
-  </form>
-</div>
+    </div>
+  </div>
+  
+</body>
+
+</html>
+
