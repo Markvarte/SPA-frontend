@@ -43,7 +43,11 @@ export class TenantAddUpdateComponent implements OnInit {
       this.tenant.flatId = this.flatIdSaver;
       // if form DOES NOT contains id then we are adding tenant
       if (!this.tenantForm.value.id) {
-        this.addTenant(this.tenant);
+        const dto = {
+          ...this.tenantForm.value,
+          flatId: this.tenant.flatId,
+        };
+        this.addTenant(dto);
       } else {
         // if form contains id then we are updating tenant
         this.updateTenant(this.tenant);
@@ -122,7 +126,7 @@ export class TenantAddUpdateComponent implements OnInit {
       .subscribe(newTenant => {
         this.tenant = newTenant;
         this.router.navigateByUrl(`/tenants/${this.tenant.flatId}/list`);
-       },
+      },
         // if errors console.log it
         (err: HttpErrorResponse) => console.log(err.error));
   }
