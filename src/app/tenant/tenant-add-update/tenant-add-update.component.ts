@@ -106,7 +106,11 @@ export class TenantAddUpdateComponent implements OnInit {
       // only digits
       phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(6)]],
       eMail: ['', [Validators.required, Validators.email]], // eMail format
-      flatId: [null] // hidden
+      flatId: [null], // hidden
+      flatNum: [null], // hidden
+      houseId: [null], // hidden
+      houseNum: [null], // hidden
+      houseStreet: [null] // hidden
     });
   }
 

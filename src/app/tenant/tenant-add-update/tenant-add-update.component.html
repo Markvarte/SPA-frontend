@@ -1,3 +1,6 @@
+<div class="row" class="text-center">
+  <h2 *ngIf="tenant.id"> {{ tenant.houseStreet }}, {{ tenant.houseNum }} - {{ tenant.flatNum }} </h2>
+</div>
 <div class="row">
   <p>
     <button type="button" class="btn btn-primary" (click)="backToTenants()">Back </button>
@@ -55,6 +58,10 @@
         </div>
       </div>
       <input type="number" [hidden]='true' formControlName="flatId">
+      <input type="number" [hidden]='true' formControlName="flatNum">
+      <input type="number" [hidden]='true' formControlName="houseId">
+      <input type="number" [hidden]='true' formControlName="houseNum">
+      <input type="number" [hidden]='true' formControlName="houseStreet">
 
       </div>
     <button type="submit" class="btn btn-primary" [disabled]="tenantForm.invalid" (click)="onFormSubmit()">Submit</button>
