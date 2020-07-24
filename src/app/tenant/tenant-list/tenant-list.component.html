@@ -1,3 +1,7 @@
+<div class="row" class="text-center">
+  <h2> {{ tenants[0].houseStreet }}, {{ tenants[0].houseNum }} - {{ tenants[0].flatNum }} </h2>
+</div>
+
 <div>
   <button type="button" class="btn btn-primary mb-2" (click)="backToFlats()"> Back </button>
 </div>
@@ -22,16 +26,16 @@
       </tr>
       <tr *ngFor="let value of tenants; index as i">
         <th scope="row">{{ i + 1 }}</th>
-      <td> {{ value.firstName }}</td>
-      <td>{{ value.lastName }}</td>
-      <td>{{ value.personalCode }}</td>
-      <td>{{ value.dateOfBirst}}</td>
-      <td>{{ value.phoneNumber }}</td>
-      <td>{{ value.eMail }}</td>
-      <td>
-        <button type="button" class="btn btn-primary mb-2" [routerLink]="['../edit',value.id]">Edit</button>
-        <button type="submit" class="btn btn-danger mb-2" (click)="deleteTenant(value.id)">Delete</button>
-      </td>
+        <td> {{ value.firstName }}</td>
+        <td>{{ value.lastName }}</td>
+        <td>{{ value.personalCode }}</td>
+        <td>{{ value.dateOfBirst}}</td>
+        <td>{{ value.phoneNumber }}</td>
+        <td>{{ value.eMail }}</td>
+        <td>
+          <button type="button" class="btn btn-primary mb-2" [routerLink]="['../edit',value.id]">Edit</button>
+          <button type="submit" class="btn btn-danger mb-2" (click)="deleteTenant(value.id)">Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>

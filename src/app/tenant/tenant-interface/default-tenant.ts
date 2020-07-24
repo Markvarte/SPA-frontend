@@ -7,7 +7,10 @@ export interface Tenant {
     phoneNumber: string;
     eMail: string;
     flatId: number;
+    flatNum: number;
     houseId: number; // Needed for navigation back to Flat list
+    houseNum: number;
+    houseStreet: string;
 }
 export class DefaultTenant implements Tenant {
     id: number = null;
@@ -18,5 +21,8 @@ export class DefaultTenant implements Tenant {
     phoneNumber = '';
     eMail = '';
     flatId: number = null;
+    flatNum: number = null;
     houseId: number = null;
+    houseNum: number = null;
+    houseStreet = '';
 }
