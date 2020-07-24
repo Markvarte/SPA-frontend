@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Flat, DefaultFlat } from '../flat-interface/default-flat';
 import { FlatService } from '../flat.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -12,10 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class FlatListComponent implements OnInit {
 
-  // Static for flat-add-update.component
-  static currentHouseId: number;
-  /* // output to TenantList
-  @Output() goToTenantList = new EventEmitter<number>(); */
+
+  currentHouseId: number;
   flats: Array<Flat>;
   // Array of Flats, which will be displayed
   defaultFlat: Flat;
@@ -29,12 +27,6 @@ export class FlatListComponent implements OnInit {
     this.defaultFlat = new DefaultFlat();
   }
 
- /*   emitCurrentHouseIdToTenantList(currentHouseId: number) {
-    // Method sent currentHouseId to TenantList
-    // because Tenant list button back needs to be navigated to flat list
-    // but flat list route contains currentHouseId.
-    this.goToTenantList.emit(currentHouseId);
-  } */
   deleteFlat(flatId: number) {
     // Find index which needed to be deleted
     const deleteIndex = this.flats.findIndex(flat => flat.id === flatId);
@@ -51,9 +43,9 @@ export class FlatListComponent implements OnInit {
   ngOnInit() {
     this.route.parent.params.subscribe(param => {
       //  '+' === 'parseToInt(...)'
-      FlatListComponent.currentHouseId = +param.houseId;
-      if (FlatListComponent.currentHouseId) {
-        this.getFlatsFromServer(FlatListComponent.currentHouseId);
+      this.currentHouseId = +param.houseId;
+      if (this.currentHouseId) {
+        this.getFlatsFromServer(this.currentHouseId);
       } else {
         this.router.navigate(['/']);
       }

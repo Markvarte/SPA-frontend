@@ -15,6 +15,7 @@ export class FlatAddUpdateComponent implements OnInit {
 
   flat: Flat;
   flatForm: FormGroup;
+  currentHouseId: number;
   isValid = false;
   // for displaying "submitted successfully" alert
 
@@ -32,7 +33,7 @@ export class FlatAddUpdateComponent implements OnInit {
       // if valid => flat data contains submitted form data
       this.flat = this.flatForm.value;
       // after form value assigned to this.flat, this.flat.id and houseId become null
-      this.flat.houseId = FlatListComponent.currentHouseId;
+      this.flat.houseId = this.currentHouseId;
       // if form not contains id
       if (!this.flatForm.value.id) {
         this.addFlat(this.flat);
@@ -47,15 +48,17 @@ export class FlatAddUpdateComponent implements OnInit {
     // segments 'edit/id' and 'add' can't be navigated just by '../',
     // because edit goes to /edit route and add goes to list route.
     // that why there is absolute route t0 navigate back
-    this.router.navigateByUrl(`/flats/${FlatListComponent.currentHouseId}`);
+    this.router.navigateByUrl(`/flats/${this.flat.houseId}`);
   }
   ngOnInit() {
     this.route.params.subscribe(param => {
       //  '+' === 'parseToInt(...)'
       this.flat.id = +param.flatId;
-
-      // TODO: ну кароче статик не нужен 💩💩💩
-      this.flat.houseId = FlatListComponent.currentHouseId;
+      this.route.parent.params.subscribe(parentParam => {
+        // need to save current house id for adding, editing and navigate back
+        this.currentHouseId = +parentParam.houseId;
+        this.flat.houseId = this.currentHouseId;
+      });
 
       if (this.flat.id) {// if number param exist
         // edit mode
@@ -93,7 +96,9 @@ export class FlatAddUpdateComponent implements OnInit {
       tenantsCount: [null, [Validators.required, Validators.min(0)]], // calculate this by connected tenant id ?
       totalArea: [null, [Validators.required, Validators.min(15)]],
       livingArea: [null, [Validators.required, Validators.min(15)]],
-      houseId: [null] // hidden
+      houseId: [null], // hidden
+      houseNum: [null], // hidden
+      houseStreet: [null] // hidden
     });
   }
   private updateFlat(flat: Flat) {
@@ -103,7 +108,7 @@ export class FlatAddUpdateComponent implements OnInit {
       // (this is not really necessary, but what i need to do with returned updated flat?)
       .subscribe(newFlat => {
         this.flat = newFlat;
-        this.router.navigateByUrl(`/flats/${FlatListComponent.currentHouseId}`);
+        this.router.navigateByUrl(`/flats/${this.currentHouseId}`);
       },
         // if errors console.log it
         (err: HttpErrorResponse) => console.log(err.error));
