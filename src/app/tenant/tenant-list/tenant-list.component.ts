@@ -57,6 +57,11 @@ export class TenantListComponent implements OnInit {
       .subscribe(
         (data: Array<Tenant>) => {
           this.tenants = data;
+          console.log(this.tenants);
+          // if tenants not contain data => go to add form
+          if (this.tenants.length === 0) {
+            this.router.navigateByUrl(`/tenants/${flatId}/add`);
+          }
         },
         (err: HttpErrorResponse) => {
           // If errors -> navigate to root
